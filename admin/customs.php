@@ -2,7 +2,7 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
 
-    $sql = "SELECT * FROM manager WHERE 1  ORDER BY id DESC";
+    $sql = "SELECT * FROM customs WHERE 1  ORDER BY id DESC";
     
     $lists = $db->rawQuery($sql);
 
@@ -54,7 +54,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            經手人列表
+                            客戶會員列表
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,10 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>姓名</th>
-                                                <th>動作</th>
+                                                <th>市話</th>
+                                                <th>手機</th>
+                                                <th>住址</th>
+                                                <th>頭銜</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -84,7 +87,10 @@
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td><a href="editmanager.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['name'].'" class="del_one">刪除</a></td>';
+                                                    echo '<td>'.$list['tel'].'</td>';
+                                                    echo '<td>'.$list['mobile'].'</td>';
+                                                    echo '<td>'.$list['address'].'</td>';
+                                                    echo '<td>'.$list['title'].'</td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }

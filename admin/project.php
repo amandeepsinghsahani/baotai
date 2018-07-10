@@ -2,7 +2,7 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
 
-    $sql = "SELECT * FROM manager WHERE 1  ORDER BY id DESC";
+    $sql = "SELECT * FROM project WHERE 1  ORDER BY id DESC";
     
     $lists = $db->rawQuery($sql);
 
@@ -54,7 +54,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            經手人列表
+                            建案列表
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td><a href="editmanager.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['name'].'" class="del_one">刪除</a></td>';
+                                                    echo '<td><a href="editproject.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['name'].'" class="del_one">刪除</a></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
@@ -129,7 +129,7 @@
         var obj = {};
         obj['id'] = $(this).prop("id").split("_")[1];
         $.ajax({
-            url: '../delete_manager.php',
+            url: '../delete_project.php',
             cache: false,
             dataType: 'html',
             type: 'POST',
@@ -141,7 +141,7 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                 alert("刪除成功");
+                alert("刪除成功");
                 location.reload();
             }
         });
