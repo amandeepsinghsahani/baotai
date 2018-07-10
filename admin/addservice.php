@@ -2,7 +2,7 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
 
-    $sql = "SELECT * FROM manager ORDER BY id DESC";
+    $sql = "SELECT * FROM customs ORDER BY id DESC";
     
     $managers = $db->rawQuery($sql);
 ?>
@@ -55,7 +55,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            新增建案
+                            新增客服紀錄
                         </div>
                     </div>
                 </div>
@@ -73,11 +73,33 @@
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="multiple-select" class=" form-control-label">請選分類&項目</label>
+                                                    <label for="multiple-select" class=" form-control-label">請選分類項目</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                     <select id="country" class="dept_select"></select>
                                                     <select id="province" class="dept_select"></select>
+                                                </div>
+                                            </div>
+                                             <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="custom" class=" form-control-label">請選客戶</label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <select id="custom">
+                                                        <?php
+                                                            foreach ($managers as $list){ 
+                                                                echo '<option value="'.$list['id'].'" >'.$list['name'].'</option>';  
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                             <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="content" class=" form-control-label">內容</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea id="content" rows="9" placeholder="內容..." class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </form>
@@ -124,19 +146,17 @@
     <script type="text/javascript" src="js/area_chs.js"></script>
      <script type="text/javascript">
     $(document).on("click", "#add", function() {
-        var getSelect = $("#multiple-select").val();
-        var selectStr = "";
-        for (var i in getSelect) {
-            if(i == 0)
-                selectStr += getSelect[i];
-            else
-                selectStr += ","+getSelect[i];
+        if($("#content").val().length == 0){
+            alert("請填寫客服內容");
+            return false;
         }
         var obj = {};
-        obj['name'] = $("#projectname").val();
-        obj['team'] =  selectStr;
+        obj['stype'] = $("#country").val();
+        obj['sitem'] = $("#province").val();
+        obj['from_custom'] = $("#custom").val();
+        obj['content'] = $("#content").val();
         $.ajax({
-            url: '../add_project.php',
+            url: '../add_service.php',
             cache: false,
             dataType: 'html',
             type: 'POST',
@@ -152,8 +172,6 @@
                 if(xx.message == "success"){
                     alert('新增成功');
                     location.reload();
-                }else if(xx.message == "repeat"){
-                    alert('已有同名稱之專案');
                 }else if(xx.message == "failure"){
                     alert('新增失敗');
                 }
@@ -206,9 +224,6 @@ function initLocation(e){
 		$(".dept_select").trigger("chosen:updated");
 	});
 	$("#country").change();
-	$("button").click(function(){
-		alert($("#country").val()+$("#province").val());
-	});
 </script>
 </body>
 
