@@ -141,7 +141,7 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                 alert("刪除成功");
+                alert("刪除成功");
                 location.reload();
             }
         });

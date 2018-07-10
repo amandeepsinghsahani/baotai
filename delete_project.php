@@ -9,5 +9,5 @@
         $db->rollback();
         $data_message  = "failure";
     }
-    return $data_message;
+    echo json_encode($data_message);
 ?>

@@ -2,9 +2,18 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
 
-    $sql = "SELECT * FROM manager ORDER BY id DESC";
+    if(!isset($_GET['id'])){
+        header('Location: project.php');
+    }
+    $onesql = "SELECT * FROM project WHERE id = ? ";
+    $oneProject = $db->rawQuery($onesql,array($_GET['id']));
     
+
+    $sql = "SELECT * FROM manager ORDER BY id DESC";
     $managers = $db->rawQuery($sql);
+
+    $alreadySelectArray = explode(",",$oneProject[0]['team']);
+    
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +85,7 @@
                                                     <label for="projectname" class=" form-control-label">專案名稱</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="projectname"  placeholder="請輸入專案名稱" class="form-control">
+                                                    <input type="text" id="projectname"  placeholder="請輸入專案名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -86,18 +95,25 @@
                                                 <div class="col col-md-9">
                                                     <select name="multiple-select" id="multiple-select" multiple="" class="form-control">
                                                     <?php
-                                                        foreach ($managers as $list){ 
-                                                            echo '<option value="'.$list['id'].'">'.$list['name'].'</option>';
+                                                        foreach ($managers as $list){
+                                                            if(in_array($list['id'], $alreadySelectArray))
+                                                                echo '<option value="'.$list['id'].'" selected>'.$list['name'].'</option>';
+                                                            else
+                                                                echo '<option value="'.$list['id'].'">'.$list['name'].'</option>';
                                                         }
                                                     ?>
                                                     </select>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="projectid" value="<?=$oneProject[0]['id']?>">
                                         </form>
                                     </div>
                                     <div class="card-footer">
                                         <button type="submit" id="add" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> 確定新增
+                                            <i class="fa fa-dot-circle-o"></i> 確定修改
+                                        </button>
+                                         <button type="submit"  class="btn btn-primary btn-sm" onclick="history.back()">
+                                            <i class="fa fa-dot-circle-o"></i> 取消
                                         </button>
                                     </div>
                                 </div>
@@ -146,8 +162,9 @@
         var obj = {};
         obj['name'] = $("#projectname").val();
         obj['team'] =  selectStr;
+        obj['id'] =  $("#projectid").val();
         $.ajax({
-            url: '../add_project.php',
+            url: '../edit_project.php',
             cache: false,
             dataType: 'html',
             type: 'POST',
@@ -161,10 +178,8 @@
             success: function(response) {
                 var xx = JSON.parse(response);
                 if(xx.message == "success"){
-                    alert('新增成功');
+                    alert('修改成功');
                     location.reload();
-                }else if(xx.message == "repeat"){
-                    alert('已有同名稱之專案');
                 }else if(xx.message == "failure"){
                     alert('新增失敗');
                 }

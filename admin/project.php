@@ -84,7 +84,7 @@
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td><a href="editproject.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['name'].'" class="del_one">刪除</a></td>';
+                                                    echo '<td><a href="editproject.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['id'].'" class="del_one">刪除</a></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
