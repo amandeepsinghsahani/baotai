@@ -1,12 +1,4 @@
-<?php
-	include "../includes/init.php";
-    include "../includes/_inc.php";
 
-    $sql = "SELECT * FROM project WHERE 1  ORDER BY id DESC";
-    
-    $lists = $db->rawQuery($sql);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +15,8 @@
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
@@ -46,55 +38,50 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-       <?php  include('menu.php');?>
+       
+        <?php  include('menu.php');?>
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
+           <!-- HEADER DESKTOP-->
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            建案列表
+                            新增經手人
                         </div>
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row m-t-30">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE-->
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data2">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>姓名</th>
-                                                <th>動作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                             <?php
-                                                $i = 1;
-                                                foreach ($lists as $list){ 
-                                                    echo '<tr>';
-                                                    echo '<td>'.$i.'</td>';
-                                                    echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td><a href="editproject.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['id'].'" class="del_one">刪除</a></td>';
-                                                    echo '</tr>';
-                                                    $i++;
-                                                }
-                                            ?>
-                                            </tbody>
-                                    </table>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body card-block">
+                                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectname" class=" form-control-label">經手人名稱</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectname"  placeholder="請輸入經手人名稱" class="form-control">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" id="add" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> 確定新增
+                                        </button>
+                                    </div>
                                 </div>
-                                <!-- END DATA TABLE-->
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,12 +111,12 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-    <script type="text/javascript">
-    $(document).on("click", ".del_one", function() {
+     <script type="text/javascript">
+    $(document).on("click", "#add", function() {
         var obj = {};
-        obj['id'] = $(this).prop("id").split("_")[1];
+        obj['name'] = $("#projectname").val();
         $.ajax({
-            url: '../delete_project.php',
+            url: '../add_manager.php',
             cache: false,
             dataType: 'html',
             type: 'POST',
@@ -143,11 +130,14 @@
             success: function(response) {
                 var xx = JSON.parse(response);
                 if(xx.message == "success"){
-                    alert('刪除成功');
+                    alert('新增成功');
                     location.reload();
+                }else if(xx.message == "repeat"){
+                    alert('已有同名稱之經理人');
                 }else if(xx.message == "failure"){
-                    alert('刪除失敗');
+                    alert('新增失敗');
                 }
+                
             }
         });
     });

@@ -1,17 +1,26 @@
 <?php
     include "includes/init.php";
     $data_message = array();
-    $data = array (
-                    "name" => $_REQUEST['name']
-    );
-    $db->startTransaction();
-    $m_id = $db->insert ('manager', $data);
-    if ($m_id) {
-        $db->commit();
-        $data_message['message']  = "success";
+    $sql = "SELECT id
+    FROM manager
+    WHERE name = ? ";
+    //echo  $sql;
+    $lists = $db->rawQuery($sql,array($_REQUEST['name']));
+    if(count($lists) > 0){
+        $data_message['message']  = "repeat";
     }else{
-        $db->rollback();
-        $data_message['message']  = "failure";
+        $data = array (
+            "name" => $_REQUEST['name']
+        );
+        $db->startTransaction();
+        $m_id = $db->insert ('manager', $data);
+        if ($m_id) {
+            $db->commit();
+            $data_message['message']  = "success";
+        }else{
+            $db->rollback();
+            $data_message['message']  = "failure";
+        }
     }
-    return $data_message;
+    echo json_encode($data_message);
 ?>

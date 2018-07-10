@@ -1,13 +1,14 @@
 <?php
     include "includes/init.php";
-    $data_message = "success";
+    $data_message = array();
     $db->startTransaction();
     $db->where ('id', $_POST["id"]);
     if ($db->delete ("project")){
         $db->commit();
+        $data_message['message']  = "success";
     }else{
         $db->rollback();
-        $data_message  = "failure";
+        $data_message['message']  = "failure";
     }
     echo json_encode($data_message);
 ?>

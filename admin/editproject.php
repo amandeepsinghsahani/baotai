@@ -64,7 +64,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            新增建案
+                            編修建案
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                                         <button type="submit" id="add" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> 確定修改
                                         </button>
-                                         <button type="submit"  class="btn btn-primary btn-sm" onclick="history.back()">
+                                         <button type="submit"  class="btn btn-primary btn-sm" onclick="location = 'project.php'">
                                             <i class="fa fa-dot-circle-o"></i> 取消
                                         </button>
                                     </div>
@@ -181,7 +181,7 @@
                     alert('修改成功');
                     location.reload();
                 }else if(xx.message == "failure"){
-                    alert('新增失敗');
+                    alert('修改失敗');
                 }
                 
             }

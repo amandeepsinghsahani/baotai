@@ -84,7 +84,7 @@
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td><a href="editmanager.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['name'].'" class="del_one">刪除</a></td>';
+                                                    echo '<td><a href="editmanager.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['id'].'" class="del_one">刪除</a></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
@@ -141,8 +141,13 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                alert("刪除成功");
-                location.reload();
+                var xx = JSON.parse(response);
+                if(xx.message == "success"){
+                    alert('刪除成功');
+                    location.reload();
+                }else if(xx.message == "failure"){
+                    alert('刪除失敗');
+                }
             }
         });
     });
