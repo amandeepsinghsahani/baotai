@@ -114,7 +114,7 @@
                                                 <th>內容</th>
                                                 <th>客服對象</th>
                                                 <th>回應紀錄</th>
-                                                <th>新增回應</th>
+                                                <th>新增問題處理</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,10 +128,10 @@
                                                     echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['from_custom'].'">
                                                                 '.$list['cname'].'
                                                             </button></td>';
-                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['from_custom'].'">
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 res_info" data-toggle="modal" data-target="#mediumModal2" id="res_'.$list['id'].'_'.$list['sitem'].'_'.$list['content'].'">
                                                                 點我查看
                                                             </button></td>';
-                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal1">新增</button></td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 add_response" data-toggle="modal" data-target="#mediumModal1" id="addres_'.$list['id'].'">新增</button></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
@@ -169,22 +169,60 @@
 				</div>
 			</div>
             <!-- end modal medium -->
-             <!-- modal medium1 -->
+            <!-- modal medium1 -->
 			<div class="modal fade" id="mediumModal1" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="mediumModalLabel">新增客服回應</h5>
+							<h5 class="modal-title" id="mediumModalLabel">新增客服處理</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-                            姓名:<span id="cname"></span><br>
-                            頭銜:<span id="ctitle"></span><br>
-                            市話:<span id="ctel"></span><br>
-                            手機:<span id="cmobile"></span><br>
-                            住址:<span id="caddress"></span>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input" class=" form-control-label">問題處理</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea  id="textarea-input" rows="9" placeholder="請填入內容..." class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" id="res_s_id" value="">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" id="add_res_btn">確定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- end modal medium1 -->
+            <!-- modal medium2 -->
+			<div class="modal fade" id="mediumModal2" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">客服處理紀錄</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            類別:<span ><?=$sid?></span><br>
+                            項目:<span id="res_item"></span><br>
+                            客服內容:<span id="res_q_content"></span><br>
+                           <table class="table table-borderless table-data2">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>處理內容</th>
+                                        <th>處理時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="res_table">
+                                       
+                                 </tbody>
+                            </table>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
@@ -192,7 +230,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- end modal medium -->
+			<!-- end modal medium2 -->
         </div>
 
     </div>
@@ -244,6 +282,68 @@
                 $("#cmobile").text(xx.mobile);
                 $("#ctitle").text(xx.title);
                 $("#caddress").text(xx.address);
+            }
+        });
+    });
+    $(document).on("click", ".add_response", function() {
+        $("#res_s_id").val($(this).prop("id").split("_")[1]);
+    });
+    $(document).on("click", "#add_res_btn", function() {
+        var obj = {};
+        obj['sid'] = $("#res_s_id").val();
+        obj['content'] = $("#textarea-input").val();
+        // console.log(obj);
+        // $("#textarea-input").val("");
+        $.ajax({
+            url: '../add_response.php',
+            cache: false,
+            dataType: 'html',
+            type: 'POST',
+            data: obj,
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('HTTP status code: ' + jqXHR.status + '\n' +
+                'textStatus: ' + textStatus + '\n' +
+                'errorThrown: ' + errorThrown);
+                console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
+            },
+            success: function(response) {
+                //console.log(response);
+                var xx = JSON.parse(response);
+                if(xx.message == "success"){
+                    alert('新增成功');
+                    $("#textarea-input").val("");
+                }else if(xx.message == "failure"){
+                    alert('新增失敗');
+                }
+            }
+        });
+    });
+    $(document).on("click", ".res_info", function() {
+        $("#res_item").text($(this).prop("id").split("_")[2]);
+        $("#res_q_content").text($(this).prop("id").split("_")[3]);
+        var obj = {};
+        obj['sid'] = $(this).prop("id").split("_")[1];
+        $.ajax({
+            url: '../get_response.php',
+            cache: false,
+            dataType: 'json',
+            type: 'POST',
+            data: obj,
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('HTTP status code: ' + jqXHR.status + '\n' +
+                'textStatus: ' + textStatus + '\n' +
+                'errorThrown: ' + errorThrown);
+                console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
+            },
+            success: function(response) {
+                console.log(response);
+                var tr = "";
+                var iii = 1;
+                response.forEach(function(element) {
+                    tr += '<tr><td >'+iii+'</td><td >'+element.content+'</td><td>'+element.date+'</td><tr>';
+                    iii++;
+                });
+                $("#res_table").html(tr);
             }
         });
     });
