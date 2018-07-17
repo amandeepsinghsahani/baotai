@@ -2,16 +2,27 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
     $sid = "漏水";
+    $search = "";
     if(isset($_GET['sid'])){
         $sid = $_GET['sid'];
     }
+    if(isset($_GET['search'])){
+        $search = $_GET['search'];
+    }
     $ff = array(array("name"=>"漏水"),array("name"=>"地磚"),array("name"=>"壁磚"),array("name"=>"設備"),array("name"=>"油漆"));
 
-
-    $sql = "SELECT service.* ,customs.name as cname
-    FROM service , customs
-    WHERE service.stype = ? AND service.from_custom = customs.id
-    ORDER BY service.id DESC";
+    if(empty($search)){
+        $sql = "SELECT service.* ,customs.name as cname
+        FROM service , customs
+        WHERE service.stype = ? AND service.from_custom = customs.id
+        ORDER BY service.id DESC";
+    }else{
+         $sql = "SELECT service.* ,customs.name as cname
+        FROM service , customs
+        WHERE service.stype = ? AND customs.name like '%".$search."%'  AND service.from_custom = customs.id
+        ORDER BY service.id DESC";
+    }
+    
     $lists = $db->rawQuery($sql,array($sid));
 
 ?>
@@ -63,6 +74,13 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             客服紀錄列表
+                            <form class="form-header" action="service.php" method="GET">
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="搜尋客服對象" value="<?=$search?>" />
+                                <input  type="hidden" name="sid"  value="<?=$sid?>" />
+								<button class="au-btn--submit" >
+									<i class="zmdi zmdi-search"></i>
+								</button>
+							</form>
                         </div>
                     </div>
                 </div>
@@ -79,9 +97,9 @@
                                     <?php
                                         foreach ($ff as $list){ 
                                             if($sid == $list['name'])
-                                                echo '<option value="service.php?sid='.$list['name'].'" selected>'.$list['name'].'</option>';
+                                                echo '<option value="service.php?sid='.$list['name'].'&search='.$search.'" selected>'.$list['name'].'</option>';
                                             else
-                                                echo '<option value="service.php?sid='.$list['name'].'" >'.$list['name'].'</option>';
+                                                echo '<option value="service.php?sid='.$list['name'].'&search='.$search.'" >'.$list['name'].'</option>';
                                         }
                                     ?>
                                 </select>
@@ -95,6 +113,8 @@
                                                 <th>項目</th>
                                                 <th>內容</th>
                                                 <th>客服對象</th>
+                                                <th>回應紀錄</th>
+                                                <th>新增回應</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -108,6 +128,10 @@
                                                     echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['from_custom'].'">
                                                                 '.$list['cname'].'
                                                             </button></td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['from_custom'].'">
+                                                                點我查看
+                                                            </button></td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal1">新增</button></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
@@ -127,6 +151,30 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="mediumModalLabel">客戶詳細資料</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            姓名:<span id="cname"></span><br>
+                            頭銜:<span id="ctitle"></span><br>
+                            市話:<span id="ctel"></span><br>
+                            手機:<span id="cmobile"></span><br>
+                            住址:<span id="caddress"></span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- end modal medium -->
+             <!-- modal medium1 -->
+			<div class="modal fade" id="mediumModal1" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">新增客服回應</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -189,7 +237,7 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 var xx = JSON.parse(response);
                 $("#cname").text(xx.name);
                 $("#ctel").text(xx.tel);
