@@ -146,7 +146,8 @@
                 var xx = JSON.parse(response);
                 if(xx.message == "success"){
                     alert('修改成功');
-                    location.reload();
+                    // location.reload();
+                    location.href = 'manager.php';
                 }else if(xx.message == "failure"){
                     alert('修改失敗');
                 }
