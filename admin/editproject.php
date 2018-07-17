@@ -231,7 +231,7 @@
                 if(xx.message == "success"){
                     alert('修改成功');
                     //location.reload();
-                    location.href = '<project></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>t></project>                                                .php';
+                    location.href = 'project.php';
                 }else if(xx.message == "failure"){
                     alert('修改失敗');
                 }
