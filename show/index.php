@@ -70,12 +70,12 @@
 	
 <section id="0" class="navbar-fixed-top col-lg-1 col-sm-1 col-xs-2">
 <div class="row">
-<a href="tel:03-2870222"><img src="images/ICONOP-01.png" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
+<a href="tel:03-4072899"><img src="images/ICONOP-01.png" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
 <a href="index.html#projects01"><img src="images/ICONOP-03.png" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
-<a href="tel:03-2870222" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;button&#39;, &#39;clicktocall&#39;)"><img src="images/ICONOP-01.png" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
+<a href="tel:03-4072899" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;button&#39;, &#39;clicktocall&#39;)"><img src="images/ICONOP-01.png" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
 <a href="index.html#projects01" target="_blank"><img src="images/ICONOP-03.png" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
-<a href="https://www.google.com.tw/maps/place/%E6%98%8E%E6%97%A5%E6%9C%97%E6%9C%97%EF%BC%8E%E6%98%8E%E6%97%A5%E7%A6%BE%E7%A6%BE%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@25.010022,121.2027492,17z/data=!4m12!1m6!3m5!1s0x346821c43c1b01c5:0x25501cbb8ed9ac97!2z5piO5pel5pyX5pyX77yO5piO5pel56a-56a-5o6l5b6F5pyD6aSo!8m2!3d25.010022!4d121.2049379!3m4!1s0x346821c43c1b01c5:0x25501cbb8ed9ac97!8m2!3d25.010022!4d121.2049379" target="_blank"><img src="images/ICONOP-02.png" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
-<a href="https://www.google.com.tw/maps/place/%E6%98%8E%E6%97%A5%E6%9C%97%E6%9C%97%EF%BC%8E%E6%98%8E%E6%97%A5%E7%A6%BE%E7%A6%BE%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@25.010022,121.2027492,17z/data=!4m12!1m6!3m5!1s0x346821c43c1b01c5:0x25501cbb8ed9ac97!2z5piO5pel5pyX5pyX77yO5piO5pel56a-56a-5o6l5b6F5pyD6aSo!8m2!3d25.010022!4d121.2049379!3m4!1s0x346821c43c1b01c5:0x25501cbb8ed9ac97!8m2!3d25.010022!4d121.2049379" target="_blank"><img src="images/ICONOP-02.png" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
+<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img src="images/ICONOP-02.png" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
+<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img src="images/ICONOP-02.png" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
   </div>
 </section>
 <!--<section id="fh5co-services" data-section="about">-->
@@ -160,9 +160,23 @@
   </div>
 	</section>
     <div>
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7241.373849596462!2d121.183477!3d24.840378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3a9ca1609115966f!2z5omY5pav5Y2h5bC85o6l5b6F5pyD6aSo!5e0!3m2!1szh-TW!2sus!4v1532317912036" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7241.373849596462!2d121.183477!3d24.840378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3a9ca1609115966f!2z5omY5pav5Y2h5bC85o6l5b6F5pyD6aSo!5e0!3m2!1szh-TW!2sus!4v1532317912036" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 	
+	<div id="fb-root"></div>
+	<script>
+		(function(d,s,id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if(d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12@autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js,fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div class="fb-customerchat" 
+	pqge_id="741135449359806"
+	logged_in_greeting="您好! 請問今天能為您提供什麼服務呢?" 
+	logged_out_greeting="您好! 請問今天能為您提供什麼服務呢?">
+	</div>
 	<!-- jQuery -->
 	<!-- <script src="js/jquery.min.js"></script> -->
 	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
