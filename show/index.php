@@ -6,17 +6,17 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>明日禾禾</title>
+	<title>盧卡小鎮</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="3房自備48萬起交屋，桃園美術館特區，A19站旁，面3000坪公園，吹吹風綠生活，老街溪河濱單車樂活" />
-	<meta name="keywords" content="明日禾禾, 首付48萬, 桃園美術館特區, A19站, 3000坪公園, 綠意環抱, 青埔三大萬坪公園, 美術館, 限量" />
-	<meta name="author" content="明日禾禾" />
+	<meta name="description" content="寶台機構 68坪獨立私院 戶戶雙車位 3樓半義式莊園" />
+	<meta name="keywords" content="寶台機構 盧卡小鎮, 68坪獨立私院 戶戶雙車位 3樓半義式莊園" />
+	<meta name="author" content="寶台機構 盧卡小鎮" />
 
 
   	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content="明日禾禾"/>
-	<meta property="og:description" content="3房自備48萬起交屋，桃園美術館特區，A19站旁，面3000坪公園"/>
-	<meta name="twitter:title" content="明日禾禾" />
+	<meta property="og:title" content="寶台機構 盧卡小鎮"/>
+	<meta property="og:description" content="寶台機構 68坪獨立私院 戶戶雙車位 3樓半義式莊園"/>
+	<meta name="twitter:title" content="寶台機構 盧卡小鎮" />
     
     <!-- 16x16 ICON -->
     <link rel="Shortcut Icon" type="image/x-icon" href="images/Icon.png"/>
@@ -81,20 +81,7 @@
 <!--<section id="fh5co-services" data-section="about">-->
 <!--<div class="fh5co-services" data-section="there">-->
     <div class="container">
-    <img src="images/kk.jpg" class="img-responsive" alt="明日禾禾3房自備48萬起交屋">
-    <!-- <img src="images/KV01.jpg" class="img-responsive" alt="明日禾禾3房自備48萬起交屋">
-    <img src="images/NEW.jpg" class="img-responsive" alt="台北規格A19站公園宅">
-    <img src="images/KV03.jpg" class="img-responsive" alt="3000大公園面對面">
-    <img src="images/KV04.jpg" class="img-responsive" alt="萬坪青塘園 吹吹風綠生活">
-    <img src="images/KV05.jpg" class="img-responsive" alt="美術館國際競圖出爐">
-    <img src="images/KV06.jpg" class="img-responsive" alt="青埔最大 全聯福利社1分鐘">
-    <img src="images/KV07.jpg" class="img-responsive" alt="機捷A19站，環遊世界隨時啟航">
-    <img src="images/KV08.jpg" class="img-responsive" alt="70億環球購物中心">
-    <img src="images/KV09.jpg" class="img-responsive" alt="大園國際雙語高中">
-    <img src="images/KV10.jpg" class="img-responsive" alt="桃園國際棒球場">
-    <img src="images/KV11.jpg" class="img-responsive" alt="禮賓大廳尊榮美學">
-    <img src="images/KV12.jpg" class="img-responsive" alt="健身館活力泉源">
-        <img src="images/new2.jpg" class="img-responsive" alt="尊榮3房 三代同堂不是夢想"> -->
+    <img src="images/kk.jpg" class="img-responsive" alt="盧卡小鎮 68坪獨立私院 戶戶雙車位 3樓半義式莊園">
 </div>
 		
 
@@ -117,7 +104,7 @@
 			<div class="row">
 				<div class="col-md-4 to-animate">
                     <hr>
-					<h3><b><span style="color:#000000">明日禾禾</span></b></h3>
+					<h3><b><span style="color:#000000">盧卡小鎮</span></b></h3>
 					<p>桃園市中壢區高鐵特區<br>3房自備48萬起交屋<br>桃園美術館特區，<br>A19站旁，面3000坪公園<br>吹吹風綠生活，老街溪河濱單車樂活</p>
                     <hr>
                      <h3><b><span style="color:#000000">連接資訊</span></b></h3>
@@ -173,8 +160,8 @@
   </div>
 	</section>
     <div>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.708418104198!2d121.20274921537525!3d25.010021983983602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346821c43c1b01c5%3A0x25501cbb8ed9ac97!2z5piO5pel5pyX5pyX77yO5piO5pel56a-56a-5o6l5b6F5pyD6aSo!5e0!3m2!1szh-TW!2stw!4v1528959032742" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
 
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7241.373849596462!2d121.183477!3d24.840378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3a9ca1609115966f!2z5omY5pav5Y2h5bC85o6l5b6F5pyD6aSo!5e0!3m2!1szh-TW!2sus!4v1532317912036" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
 	
 	<!-- jQuery -->
 	<!-- <script src="js/jquery.min.js"></script> -->
