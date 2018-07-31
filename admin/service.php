@@ -75,7 +75,7 @@
                         <div class="header-wrap">
                             客服紀錄列表
                             <form class="form-header" action="service.php" method="GET">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="搜尋客服對象" value="<?=$search?>" />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="搜尋客服對象(輸入名字任何一個字)" value="<?=$search?>" />
                                 <input  type="hidden" name="sid"  value="<?=$sid?>" />
 								<button class="au-btn--submit" >
 									<i class="zmdi zmdi-search"></i>
