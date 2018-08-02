@@ -36,7 +36,7 @@ body, html {height: 700px; width:1230px}
     background-size: cover;
 }
 #q1 {
-    width: 40%;
+    width: 59%;
     padding: 8px;
     position: absolute;
     top: 252px;
