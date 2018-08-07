@@ -70,12 +70,12 @@
 	
 <section id="0" class="navbar-fixed-top col-lg-1 col-sm-1 col-xs-2">
 <div class="row">
-<a href="tel:03-4072899"><img src="images/i2.jpg" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
-<a href="https://www.facebook.com/baotaituscany/"><img src="images/i3.jpg" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
-<a href="tel:03-4072899" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;button&#39;, &#39;clicktocall&#39;)"><img src="images/i2.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
-<a href="https://www.facebook.com/baotaituscany/" target="_blank"><img src="images/i3.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
-<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img src="images/i1.jpg" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
-<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img src="images/i1.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
+<a href="tel:03-4072899" ><img src="images/i2.jpg" style="padding-bottom:20px" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
+<a href="https://www.facebook.com/baotaituscany/" ><img src="images/i3.jpg" style="padding-bottom:20px" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
+<a href="tel:03-4072899"  target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;button&#39;, &#39;clicktocall&#39;)"><img style="padding-bottom:20px" src="images/i2.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
+<a href="https://www.facebook.com/baotaituscany/"  target="_blank"><img style="padding-bottom:20px" src="images/i3.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
+<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img style="padding-bottom:20px" src="images/i1.jpg" class="img-rounded img-responsive visible-lg visible-md" alt="Placeholder image"></a>
+<a href="https://www.google.com.tw/maps/place/%E6%89%98%E6%96%AF%E5%8D%A1%E5%B0%BC%E6%8E%A5%E5%BE%85%E6%9C%83%E9%A4%A8/@24.840378,121.181283,17z/data=!3m1!4b1!4m5!3m4!1s0x34683c6d699881c9:0x3a9ca1609115966f!8m2!3d24.840378!4d121.183477" target="_blank"><img style="padding-bottom:20px" src="images/i1.jpg" class="img-rounded img-responsive visible-sm visible-xs" alt="Placeholder image"></a>
   </div>
 </section>
 <!--<section id="fh5co-services" data-section="about">-->
