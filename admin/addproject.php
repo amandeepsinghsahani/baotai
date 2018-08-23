@@ -1,7 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
-
+    include "ck_user.php"; 
     $sql = "SELECT * FROM manager ORDER BY id DESC";
     
     $managers = $db->rawQuery($sql);
@@ -56,6 +56,21 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             新增建案
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +96,7 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="multiple-select" class=" form-control-label">請選擇專案經手人</label>
+                                                    <label for="multiple-select" class=" form-control-label">請選擇專案業務</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                     <select name="multiple-select" id="multiple-select" multiple="" class="form-control">

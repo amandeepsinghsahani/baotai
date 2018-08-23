@@ -25,22 +25,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
  <script type="text/javascript" src="js/jquery-latest.min.js"></script>   
  <script type="text/javascript" src="js/jquery-latest.min.js"></script>   
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
-body, html {height: 700px; width:1230px}
+body, html {height: 700px; width:1280px}
 
 .bgimg {
     background-image: url('BT-bg1.png');
-    min-width: 90%;
+    min-width: 80%;
     min-height: 100%;
     background-position: center;
     background-size: cover;
 }
 #q1 {
-    width: 59%;
+    width: 56%;
     padding: 8px;
     position: absolute;
     top: 252px;
+    height:260px;
+    overflow: scroll;
 }
 input[type=text] {
     width: 70%;
@@ -146,6 +150,9 @@ input[type=text] {
 
 </style>
 <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    } );
     $(document).on("click", "#add_btn", function() {
         if($("#name").val().length == 0){
             alert("請填寫姓名");
@@ -243,18 +250,28 @@ input[type=text] {
     <h3 id="user_data3"></h3>
     <h3 id="inva_time">0</h3>
   <form id="q1">
+    <span style="color:black;">日期:</span><input type="text" id="datepicker"><br>
     <span style="color:black;">姓名:</span><input type="text" id="name"  placeholder="姓名"><br>
-    <span style="color:black;">職稱:</span><input type="text" id="title"  placeholder="職稱"><br>
-    <span style="color:black;">市話:</span><input type="text" id="tel"  placeholder="市話"><br>
-    <span style="color:black;">手機:</span><input type="text" id="mobile"  placeholder="手機"><br>
-    <span style="color:black;">住址:</span><input type="text" id="address"  placeholder="住址">
-    <span style="color:black;">經手人:</span><select id="sel_mg">
-        <?php
-                foreach ($managers as $list){ 
-                    echo '<option value="'.$list['id'].'">'.$list['name'].'</option>';
-                }
-            ?>
-    </select>
+    <span style="color:black;">性別:</span><select><option value="男">男</option><option value="女">女</option></select><br>
+    <span style="color:black;">年齡:</span><select>
+        <option value="30歲以下">30歲以下</option>
+        <option value="31~40">31~40</option>
+        <option value="41~50">41~50</option>
+        <option value="51~60">51~60</option>
+        <option value="61歲以上">61歲以上</option>
+    </select><br>
+    <span style="color:black;">電話:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">行動電話:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">區域:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">地址:</span><input type="text" id="address"  placeholder="住址"><br>
+    <span style="color:black;">購屋動機:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">希望坪數:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">希望格局:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">購屋預算:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">自備金額:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">消息來源:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">職業:</span><input type="text" id="name"  placeholder="姓名"><br>
+    <span style="color:black;">訪談內容:</span><input type="text" id="name"  placeholder="姓名"><br>
   </form>
     <input type="hidden" id="get_custom_id" value="0"/>
     <input type="button" id="add_btn" />

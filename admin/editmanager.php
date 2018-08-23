@@ -1,6 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
+    include "ck_user.php";
 
     if(!isset($_GET['id'])){
         header('Location: project.php');
@@ -57,7 +58,22 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            編修經手人
+                            編修專員
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,10 +91,10 @@
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="projectname" class=" form-control-label">經手人名稱</label>
+                                                    <label for="projectname" class=" form-control-label">專員名稱</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="projectname"  placeholder="請輸入經手人名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
+                                                    <input type="text" id="projectname"  placeholder="請輸入專員名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
                                                 </div>
                                             </div>
                                         </form>

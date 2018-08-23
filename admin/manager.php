@@ -1,7 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
-
+    include "ck_user.php"; 
     $sql = "SELECT * FROM manager WHERE 1  ORDER BY id DESC";
     
     $lists = $db->rawQuery($sql);
@@ -54,7 +54,22 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            經手人列表
+                            專員列表
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,6 +89,9 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>姓名</th>
+                                                <th>帳號</th>
+                                                <th>密碼</th>
+                                                <th>權限</th>
                                                 <th>動作</th>
                                             </tr>
                                         </thead>
@@ -84,6 +102,9 @@
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
+                                                    echo '<td>'.$list['account'].'</td>';
+                                                    echo '<td>'.$list['password'].'</td>';
+                                                    echo '<td>'.$list['type'].'</td>';
                                                     echo '<td><a href="editmanager.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['id'].'" class="del_one">刪除</a></td>';
                                                     echo '</tr>';
                                                     $i++;

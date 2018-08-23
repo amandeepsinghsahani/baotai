@@ -31,7 +31,7 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>經手人</a>
+                                <i class="fas fa-tachometer-alt"></i>專員</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="addmanager.php">新增</a>
@@ -101,7 +101,7 @@
                         </li>
                          <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>經手人</a>
+                                <i class="fas fa-tachometer-alt"></i>專員</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                  <li>
                                     <a href="addmanager.php">新增</a>

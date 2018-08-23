@@ -1,6 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
+    include "ck_user.php"; 
     $sid = "漏水";
     $search = "";
     if(isset($_GET['sid'])){
@@ -80,7 +81,22 @@
 								<button class="au-btn--submit" >
 									<i class="zmdi zmdi-search"></i>
 								</button>
-							</form>
+                            </form>
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

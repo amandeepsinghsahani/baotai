@@ -1,4 +1,6 @@
-
+<?php
+    include "ck_user.php"; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +49,22 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            新增經手人
+                            新增專員
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,10 +82,34 @@
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="projectname" class=" form-control-label">經手人名稱</label>
+                                                    <label for="projectname" class=" form-control-label">專員名稱</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="projectname"  placeholder="請輸入經手人名稱" class="form-control">
+                                                    <input type="text" id="projectname"  placeholder="請輸入專員名稱" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectaccount" class=" form-control-label">專員登入帳號</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectaccount"  placeholder="請輸入專員帳號" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectpassword" class=" form-control-label">專員登入密碼</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectpassword"  placeholder="請輸入專員密碼" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projecttype" class=" form-control-label">專員權限選擇</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select id="projecttype"><option>1</option></select>
                                                 </div>
                                             </div>
                                         </form>

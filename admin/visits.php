@@ -1,6 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
+    include "ck_user.php"; 
     $pid = 1;
     if(isset($_GET['pid'])){
         $pid = $_GET['pid'];
@@ -63,6 +64,21 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             來訪記錄列表
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

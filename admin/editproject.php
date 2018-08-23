@@ -1,7 +1,7 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
-
+    include "ck_user.php"; 
     if(!isset($_GET['id'])){
         header('Location: project.php');
     }
@@ -65,6 +65,21 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             編修建案
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" ><?=$_SESSION['user_name']?></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>登出</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,13 +105,13 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="multiple-select" class=" form-control-label">請選擇專案經手人</label>
+                                                    <label for="multiple-select" class=" form-control-label">請選擇專案業務</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                      <table>
             <tr>
                 <td class="selectbox">
-                    經手人列表:<br>
+                    業務列表:<br>
                     <select multiple id="select1" >
                         <?php
                         foreach ($managers as $list){
@@ -114,7 +129,7 @@
                     <input type="hidden" id="Mult_SelectListBox1" value="" />
                 </td>               
                 <td class="selectbox">
-                    已選經手人:<br>
+                    已選業務:<br>
                     <select multiple id="select2"> 
                           <?php
                         foreach ($managers as $list){

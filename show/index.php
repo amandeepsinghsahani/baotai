@@ -136,21 +136,25 @@
     <div>
 		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7241.373849596462!2d121.183477!3d24.840378!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3a9ca1609115966f!2z5omY5pav5Y2h5bC85o6l5b6F5pyD6aSo!5e0!3m2!1szh-TW!2sus!4v1532317912036" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 	
-	<div id="fb-root"></div>
 	<script>
-		(function(d,s,id) {
+		window.fbAsyncInit = function() {
+			FB.init({
+			appId            : '452482191922699',
+			autoLogAppEvents : true,
+			xfbml            : true,
+			version          : 'v2.12'
+			});
+		};
+
+		(function(d, s, id){
 			var js, fjs = d.getElementsByTagName(s)[0];
-			if(d.getElementById(id)) return;
+			if (d.getElementById(id)) {return;}
 			js = d.createElement(s); js.id = id;
-			js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
-			fjs.parentNode.insertBefore(js,fjs);
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
-	<div class="fb-customerchat" 
-	pqge_id="741135449359806"
-	logged_in_greeting="您好! 請問今天能為您提供什麼服務呢?" 
-	logged_out_greeting="您好! 請問今天能為您提供什麼服務呢?">
-	</div>
+	<div class="fb-customerchat" page_id="435656963593767"></div>
 	<!-- jQuery -->
 	<!-- <script src="js/jquery.min.js"></script> -->
 	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
