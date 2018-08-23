@@ -3,13 +3,15 @@
     $data_message = array();
     $data = array (
         "name" => $_REQUEST['name'],
-        "account" => $_REQUEST['account'],
-        "password" => $_REQUEST['password'],
-        "type" => $_REQUEST['type']
+        "tel" => $_REQUEST['tel'],
+        "mobile" => $_REQUEST['mobile'],
+        "level" => $_REQUEST['level'],
+        "address" => $_REQUEST['address'],
+        "memo" => $_REQUEST['memo']
     );
     $db->startTransaction();
     $db->where ('id', $_REQUEST['id']);
-    if ($db->update ('manager', $data)) {
+    if ($db->update ('customs', $data)) {
         $db->commit();
         $data_message['message']  = "success";
     }else{

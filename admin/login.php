@@ -7,11 +7,20 @@
 		$pro = $db->getOne ('manager');
 		if($pro){
 			//print_r($pro);
-			session_start();
-			$_SESSION['user_account'] = $pro["account"];
-			$_SESSION['user_id'] = $pro["id"];
-			$_SESSION['user_name'] = $pro['name'];
-			header("Location: project.php");
+			if($pro['type'] === 'admin' || $pro['type'] ==='finance' || $pro['type'] ==='construction'){
+				session_start();
+				$_SESSION['user_account'] = $pro["account"];
+				$_SESSION['user_id'] = $pro["id"];
+				$_SESSION['user_name'] = $pro['name'];
+				$_SESSION['user_type'] = $pro['type'];
+				if($_SESSION['user_type'] === 'admin'){
+					header("Location: project.php");
+				}else{
+					header("Location: service.php");
+				}
+			}else{
+				userMessage("此帳號無登入的權限","login.html");
+			}
 		}else
 			userMessage("帳號或密碼錯誤","login.html");
 	}else

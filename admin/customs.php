@@ -2,6 +2,7 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
     include "ck_user.php"; 
+    include "ck_admin.php";
     $sql = "SELECT * FROM customs WHERE 1  ORDER BY id DESC";
     
     $lists = $db->rawQuery($sql);
@@ -88,11 +89,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>會員分類</th>
                                                 <th>姓名</th>
-                                                <th>市話</th>
-                                                <th>手機</th>
-                                                <th>住址</th>
-                                                <th>頭銜</th>
+                                                <th>詳細</th>
+                                                <th>動作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -101,11 +101,12 @@
                                                 foreach ($lists as $list){ 
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
+                                                     echo '<td>'.$list['level'].'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
-                                                    echo '<td>'.$list['tel'].'</td>';
-                                                    echo '<td>'.$list['mobile'].'</td>';
-                                                    echo '<td>'.$list['address'].'</td>';
-                                                    echo '<td>'.$list['title'].'</td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['id'].'">
+                                                            詳細
+                                                            </button></td>';
+                                                    echo '<td><a href="editcustom.php?id='.$list['id'].'">修改</a>/<a href="#" id="del_'.$list['id'].'" class="del_one">刪除</a></td>';
                                                     echo '</tr>';
                                                     $i++;
                                                 }
@@ -150,7 +151,7 @@
         var obj = {};
         obj['id'] = $(this).prop("id").split("_")[1];
         $.ajax({
-            url: '../delete_manager.php',
+            url: '../delete_custom.php',
             cache: false,
             dataType: 'html',
             type: 'POST',

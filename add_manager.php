@@ -3,14 +3,17 @@
     $data_message = array();
     $sql = "SELECT id
     FROM manager
-    WHERE name = ? ";
+    WHERE account = ? ";
     //echo  $sql;
-    $lists = $db->rawQuery($sql,array($_REQUEST['name']));
+    $lists = $db->rawQuery($sql,array($_REQUEST['account']));
     if(count($lists) > 0){
         $data_message['message']  = "repeat";
     }else{
         $data = array (
-            "name" => $_REQUEST['name']
+            "name" => $_REQUEST['name'],
+            "account" => $_REQUEST['account'],
+            "password" => $_REQUEST['password'],
+            "type" => $_REQUEST['type']
         );
         $db->startTransaction();
         $m_id = $db->insert ('manager', $data);

@@ -1,5 +1,6 @@
 <?php
     include "ck_user.php"; 
+    include "ck_admin.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +110,12 @@
                                                     <label for="projecttype" class=" form-control-label">專員權限選擇</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select id="projecttype"><option>1</option></select>
+                                                    <select id="projecttype" class="form-control">
+                                                        <option value="admin">後台管理員(後台全區)</option>
+                                                        <option value="finance">財務部專員(後台客服區紀錄)</option>
+                                                        <option value="construction">工務部專員(後台客服紀錄)</option>
+                                                        <option value="sales">業務部專員(無法登入後台)</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </form>
@@ -155,7 +161,22 @@
      <script type="text/javascript">
     $(document).on("click", "#add", function() {
         var obj = {};
+        if($("#projectname").val().length ==0 || $("#projectname").val() === null){
+            alert('請輸入專員名稱');
+            return false;
+        }
+        if($("#projectaccount").val().length ==0 || $("#projectaccount").val() === null){
+            alert('請輸入專員帳號');
+            return false;
+        }
+        if($("#projectpassword").val().length ==0 || $("#projectpassword").val() === null){
+            alert('請輸入專員密碼');
+            return false;
+        }
         obj['name'] = $("#projectname").val();
+        obj['account'] = $("#projectaccount").val();
+        obj['password'] = $("#projectpassword").val();
+        obj['type'] = $("#projecttype").val();
         $.ajax({
             url: '../add_manager.php',
             cache: false,
@@ -174,7 +195,7 @@
                     alert('新增成功');
                     location.reload();
                 }else if(xx.message == "repeat"){
-                    alert('已有同名稱之經理人');
+                    alert('已有同帳號之專員');
                 }else if(xx.message == "failure"){
                     alert('新增失敗');
                 }

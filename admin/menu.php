@@ -1,3 +1,4 @@
+
  <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
@@ -17,18 +18,21 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                          <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>建案</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="addproject.php">新增</a>
-                                </li>
-                                <li>
-                                    <a href="project.php">列表</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <? if($_SESSION['user_type'] === 'admin'){
+                                echo '<li class="has-sub">
+                                    <a class="js-arrow" href="#">
+                                        <i class="fas fa-tachometer-alt"></i>建案</a>
+                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                        <li>
+                                            <a href="addproject.php">新增</a>
+                                        </li>
+                                        <li>
+                                            <a href="project.php">列表</a>
+                                        </li>
+                                    </ul>
+                                </li>';
+                            }
+                        ?>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>專員</a>
@@ -87,30 +91,34 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>建案</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="addproject.php">新增</a>
+                        <? 
+                            if($_SESSION['user_type'] === 'admin'){
+                                echo '<li class="has-sub">
+                                    <a class="js-arrow" href="#">
+                                        <i class="fas fa-tachometer-alt"></i>建案</a>
+                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                        <li>
+                                            <a href="addproject.php">新增</a>
+                                        </li>
+                                        <li>
+                                            <a href="project.php">列表</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                  <li>
-                                    <a href="project.php">列表</a>
-                                </li>
-                            </ul>
-                        </li>
-                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>專員</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                 <li>
-                                    <a href="addmanager.php">新增</a>
-                                </li>
-                                <li>
-                                    <a href="manager.php">列表</a>
-                                </li>
-                            </ul>
-                        </li>
+                                <li class="has-sub">
+                                    <a class="js-arrow" href="#">
+                                        <i class="fas fa-tachometer-alt"></i>專員</a>
+                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                        <li>
+                                            <a href="addmanager.php">新增</a>
+                                        </li>
+                                        <li>
+                                            <a href="manager.php">列表</a>
+                                        </li>
+                                    </ul>
+                                </li>';
+                            }
+                        ?>
                          <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>客戶會員</a>

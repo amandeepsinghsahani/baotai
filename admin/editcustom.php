@@ -1,22 +1,16 @@
 <?php
 	include "../includes/init.php";
     include "../includes/_inc.php";
-    include "ck_user.php"; 
+    include "ck_user.php";
     include "ck_admin.php"; 
+
     if(!isset($_GET['id'])){
-        header('Location: project.php');
+        header('Location: customs.php');
     }
-    $onesql = "SELECT * FROM project WHERE id = ? ";
+    $onesql = "SELECT * FROM customs WHERE id = ? ";
     $oneProject = $db->rawQuery($onesql,array($_GET['id']));
-    
 
-    $sql = "SELECT * FROM manager WHERE type='sales'  ORDER BY id DESC";
-    $managers = $db->rawQuery($sql);
-
-    $alreadySelectArray = explode(",",$oneProject[0]['team']);
-    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +59,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            編修建案
+                            編輯會員資料
                             <div class="header-button">
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
@@ -98,63 +92,65 @@
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="projectname" class=" form-control-label">專案名稱</label>
+                                                    <label for="projectname" class=" form-control-label">會員名稱</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="projectname"  placeholder="請輸入專案名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
+                                                    <input type="text" id="projectname"  placeholder="請輸入會員名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="multiple-select" class=" form-control-label">請選擇專案業務</label>
+                                                    <label for="projeclevel" class=" form-control-label">會員分類</label>
                                                 </div>
-                                                <div class="col col-md-9">
-                                                     <table>
-            <tr>
-                <td class="selectbox">
-                    業務列表:<br>
-                    <select multiple id="select1" >
-                        <?php
-                        foreach ($managers as $list){
-                            if(!in_array($list['id'], $alreadySelectArray))
-                                echo '<option value="'.$list['id'].'">'.$list['name'].'</option>';
-                        }
-                    ?>
-                    </select>
-                </td>
-                <td class="selectbox">
-                    <input type="button" class="add1" id="add1_all" value="&gt;&gt;" style="width: 60px" /><br />
-                    <input type="button" class="remove1" id="remove1_all" value="&lt;&lt;" style="width: 60px" /><br />
-                    <input type="button" class="add1" id="add1_one" value="&gt;" style="width: 60px" /><br />
-                    <input type="button" class="remove1" id="remove1_one" value="&lt;" style="width: 60px" /><br />
-                    <input type="hidden" id="Mult_SelectListBox1" value="" />
-                </td>               
-                <td class="selectbox">
-                    已選業務:<br>
-                    <select multiple id="select2"> 
-                          <?php
-                        foreach ($managers as $list){
-                            if(in_array($list['id'], $alreadySelectArray))
-                                echo '<option value="'.$list['id'].'">'.$list['name'].'</option>';
-                        }
-                    ?>
-                    </select>
-                </td>
-            </tr>
-        </table>
-                                                    <!-- <select name="multiple-select" id="multiple-select" multiple="" class="form-control">
-                                                    
-                                                    </select> -->
+                                                <div class="col-12 col-md-9">
+                                                     <select id="projeclevel" class="form-control">
+                                                        <option value="potential" <?php if($oneProject[0]['level']=="potential") echo 'selected'?> >潛在客戶</option>
+                                                        <option value="order" <?php if($oneProject[0]['level']=="order") echo 'selected'?>>已訂客</option>
+                                                        <option value="buy" <?php if($oneProject[0]['level']=="buy") echo 'selected'?>>已購客</option>
+                                                        <option value="refund" <?php if($oneProject[0]['level']=="refund") echo 'selected'?>>退戶</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <input type="hidden" id="projectid" value="<?=$oneProject[0]['id']?>">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projecttel" class=" form-control-label">會員電話</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projecttel"  placeholder="請輸入會員電話" value="<?=$oneProject[0]['tel']?>" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectmobile" class=" form-control-label">會員手機</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectmobile"  placeholder="請輸入會員手機" value="<?=$oneProject[0]['mobile']?>" class="form-control">
+                                                </div>
+                                            </div>
+                                             <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectaddress" class=" form-control-label">會員地址</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectaddress"  placeholder="請輸入會員地址" value="<?=$oneProject[0]['address']?>" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectmemo" class=" form-control-label">備註</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectmemo"   value="<?=$oneProject[0]['memo']?>" class="form-control">
+                                                </div>
+                                            </div>
                                         </form>
+                                        <input type="hidden" id="projectid" value="<?=$oneProject[0]['id']?>">
                                     </div>
                                     <div class="card-footer">
                                         <button type="submit" id="add" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> 確定修改
                                         </button>
-                                         <button type="submit"  class="btn btn-primary btn-sm" onclick="location = 'project.php'">
+                                        <button type="submit"  class="btn btn-primary btn-sm" onclick="location = 'manager.php'">
                                             <i class="fa fa-dot-circle-o"></i> 取消
                                         </button>
                                     </div>
@@ -191,47 +187,27 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-    <script type="text/javascript">
-    $(".add1").click(function () {
-                var id = $(this).attr('id').split('_');
-                if (id[1] == 'all') {
-                    $('#select1 option').remove().appendTo('#select2');
-                } else {
-                    $('#select1 option:selected').remove().appendTo('#select2');
-                }
-                var Mult_SelectListBox = $('#select2 option').map(function () { return $(this).val(); }).get().join(',');
-                $("#Mult_SelectListBox1").attr('value', Mult_SelectListBox);
-                return false;
-            });
-            $(".remove1").click(function () {
-                var id = $(this).attr('id').split('_');
-                if (id[1] == 'all') {
-                    $('#select2 option').remove().appendTo('#select1');
-                } else {
-                    $('#select2 option:selected').remove().appendTo('#select1');
-                }
-                var Mult_SelectListBox = $('#select2 option').map(function () { return $(this).val(); }).get().join(',');
-                $("#Mult_SelectListBox1").attr('value', Mult_SelectListBox);
-                return false;
-            });
-            //============================================================
-            
+     <script type="text/javascript">
     $(document).on("click", "#add", function() {
-        var selectStr = $("#Mult_SelectListBox1").attr('value');
-        // var selectStr = "";
-        // for (var i in getSelect) {
-        //     if(i == 0)
-        //         selectStr += getSelect[i];
-        //     else
-        //         selectStr += ","+getSelect[i];
-        // }
-        //console.log(getSelect);
         var obj = {};
+        if($("#projectname").val().length ==0 || $("#projectname").val() === null){
+            alert('請輸入會員名稱');
+            return false;
+        }
+        if($("#projectmobile").val().length ==0 || $("#projectmobile").val() === null){
+            alert('請輸入會員手機');
+            return false;
+        }
+
         obj['name'] = $("#projectname").val();
-        obj['team'] =  selectStr;
+        obj['mobile'] = $("#projectmobile").val();
+        obj['tel'] = $("#projecttel").val();
+        obj['address'] = $("#projectaddress").val();
+        obj['level'] = $("#projectlevel").val();
+        obj['memo'] = $("#projectmemo").val();
         obj['id'] =  $("#projectid").val();
         $.ajax({
-            url: '../edit_project.php',
+            url: '../edit_cutom.php',
             cache: false,
             dataType: 'html',
             type: 'POST',
@@ -246,15 +222,14 @@
                 var xx = JSON.parse(response);
                 if(xx.message == "success"){
                     alert('修改成功');
-                    //location.reload();
-                    location.href = 'project.php';
+                    // location.reload();
+                    location.href = 'customs.php';
                 }else if(xx.message == "failure"){
                     alert('修改失敗');
                 }
                 
             }
         });
-
     });
     </script>
 </body>

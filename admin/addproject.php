@@ -2,7 +2,8 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
     include "ck_user.php"; 
-    $sql = "SELECT * FROM manager ORDER BY id DESC";
+    include "ck_admin.php"; 
+    $sql = "SELECT * FROM manager WHERE type='sales' ORDER BY id DESC";
     
     $managers = $db->rawQuery($sql);
 ?>

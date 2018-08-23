@@ -109,7 +109,7 @@
                                                 <th>No</th>
                                                 <th>客戶姓名</th>
                                                 <th>來訪日期</th>
-                                                 <th>經手人</th>
+                                                 <th>經手業務專員</th>
                                             </tr>
                                         </thead>
                                         <tbody>

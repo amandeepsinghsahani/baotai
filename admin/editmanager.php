@@ -2,9 +2,10 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
     include "ck_user.php";
+    include "ck_admin.php"; 
 
     if(!isset($_GET['id'])){
-        header('Location: project.php');
+        header('Location: manager.php');
     }
     $onesql = "SELECT * FROM manager WHERE id = ? ";
     $oneProject = $db->rawQuery($onesql,array($_GET['id']));
@@ -97,6 +98,35 @@
                                                     <input type="text" id="projectname"  placeholder="請輸入專員名稱" value="<?=$oneProject[0]['name']?>" class="form-control">
                                                 </div>
                                             </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectaccount" class=" form-control-label">專員登入帳號</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectaccount"  placeholder="請輸入專員帳號" value="<?=$oneProject[0]['account']?>" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projectpassword" class=" form-control-label">專員登入密碼</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="projectpassword"  placeholder="請輸入專員密碼" value="<?=$oneProject[0]['password']?>" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="projecttype" class=" form-control-label">專員權限選擇</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select id="projecttype" class="form-control">
+                                                        <option value="admin" <?php if($oneProject[0]['type']=="admin") echo 'selected'?> >後台管理員(後台全區)</option>
+                                                        <option value="finance" <?php if($oneProject[0]['type']=="finance") echo 'selected'?>>財務部專員(後台客服區紀錄)</option>
+                                                        <option value="construction" <?php if($oneProject[0]['type']=="construction") echo 'selected'?>>工務部專員(後台客服紀錄)</option>
+                                                        <option value="sales" <?php if($oneProject[0]['type']=="sales") echo 'selected'?>>業務部專員(無法登入後台)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </form>
                                         <input type="hidden" id="projectid" value="<?=$oneProject[0]['id']?>">
                                     </div>
@@ -144,7 +174,22 @@
      <script type="text/javascript">
     $(document).on("click", "#add", function() {
         var obj = {};
+        if($("#projectname").val().length ==0 || $("#projectname").val() === null){
+            alert('請輸入專員名稱');
+            return false;
+        }
+        if($("#projectaccount").val().length ==0 || $("#projectaccount").val() === null){
+            alert('請輸入專員帳號');
+            return false;
+        }
+        if($("#projectpassword").val().length ==0 || $("#projectpassword").val() === null){
+            alert('請輸入專員密碼');
+            return false;
+        }
         obj['name'] = $("#projectname").val();
+        obj['account'] = $("#projectaccount").val();
+        obj['password'] = $("#projectpassword").val();
+        obj['type'] = $("#projecttype").val();
         obj['id'] =  $("#projectid").val();
         $.ajax({
             url: '../edit_manager.php',
