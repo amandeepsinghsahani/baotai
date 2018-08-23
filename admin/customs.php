@@ -3,9 +3,15 @@
     include "../includes/_inc.php";
     include "ck_user.php"; 
     include "ck_admin.php";
-    $sql = "SELECT * FROM customs WHERE 1  ORDER BY id DESC";
+
+    $slevel = "potential";
+    if(isset($_GET['slevel'])){
+        $slevel = $_GET['slevel'];
+    }
+
+    $sql = "SELECT * FROM customs WHERE level=?  ORDER BY id DESC";
     
-    $lists = $db->rawQuery($sql);
+    $lists = $db->rawQuery($sql,array($slevel));
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +89,12 @@
                     <div class="container-fluid">
                         <div class="row m-t-30">
                             <div class="col-md-12">
+                                <select onchange="location = this.value;">
+                                    <option value="customs.php?slevel=potential" <?php if($slevel =='potential') echo 'selected'?>>潛在客戶</option>
+                                    <option value="customs.php?slevel=order" <?php if($slevel =='order') echo 'selected'?>>已訂客</option>
+                                    <option value="customs.php?slevel=buy" <?php if($slevel =='buy') echo 'selected'?>>已購客</option>
+                                    <option value="customs.php?slevel=refund" <?php if($slevel =='refund') echo 'selected'?>>退戶</option>
+                                </select>
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive m-b-40">
                                     <table class="table table-borderless table-data2">
@@ -99,9 +111,17 @@
                                              <?php
                                                 $i = 1;
                                                 foreach ($lists as $list){ 
+                                                    $level = '潛在會員';
+                                                    if($list['level'] == 'order'){
+                                                        $level = '已訂客';
+                                                    }else if($list['level'] == 'buy'){
+                                                        $level = '已購客';
+                                                    }else  if($list['level'] == 'refund'){
+                                                        $level = '退戶';
+                                                    }
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
-                                                     echo '<td>'.$list['level'].'</td>';
+                                                    echo '<td>'.$level.'</td>';
                                                     echo '<td>'.$list['name'].'</td>';
                                                     echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['id'].'">
                                                             詳細
@@ -119,6 +139,31 @@
                         </div>
                 </div>
             </div>
+             <!-- modal medium -->
+			<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">客戶詳細資料</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            姓名:<span id="cname"></span><br>
+                            分類:<span id="clevel"></span><br>
+                            市話:<span id="ctel"></span><br>
+                            手機:<span id="cmobile"></span><br>
+                            住址:<span id="caddress"></span><br>
+                            備註:<span id="cmemo"></span><br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal medium -->
         </div>
 
     </div>
@@ -165,6 +210,33 @@
             success: function(response) {
                  alert("刪除成功");
                 location.reload();
+            }
+        });
+    });
+    $(document).on("click", ".info", function() {
+        var obj = {};
+        obj['id'] = $(this).prop("id").split("_")[1];
+        $.ajax({
+            url: '../get_cus_info.php',
+            cache: false,
+            dataType: 'html',
+            type: 'POST',
+            data: obj,
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('HTTP status code: ' + jqXHR.status + '\n' +
+                'textStatus: ' + textStatus + '\n' +
+                'errorThrown: ' + errorThrown);
+                console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
+            },
+            success: function(response) {
+                var xx = JSON.parse(response);
+                $("#cname").text(xx.name);
+                $("#clevel").text(xx.level);
+                $("#ctel").text(xx.tel);
+                $("#cmobile").text(xx.mobile);
+                $("#ctitle").text(xx.title);
+                $("#caddress").text(xx.address);
+                $("#cmemo").text(xx.memo);
             }
         });
     });

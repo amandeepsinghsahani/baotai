@@ -3,8 +3,10 @@
     include "../includes/_inc.php";
     include "ck_user.php"; 
     $sql = "SELECT * FROM customs ORDER BY id DESC";
-    
-    $managers = $db->rawQuery($sql);
+    $customs = $db->rawQuery($sql);
+
+    $sqlm = "SELECT * FROM manager WHERE type = 'construction' ORDER BY id DESC";
+    $managers = $db->rawQuery($sqlm);
 ?>
 
 <!DOCTYPE html>
@@ -95,14 +97,28 @@
                                                     <select id="province" class="dept_select"></select>
                                                 </div>
                                             </div>
-                                             <div class="row form-group">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="manager" class=" form-control-label">請選工務專員</label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <select id="manager">
+                                                        <?php
+                                                            foreach ($managers as $list){ 
+                                                                echo '<option value="'.$list['id'].'" >'.$list['name'].'</option>';  
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="custom" class=" form-control-label">請選客戶</label>
                                                 </div>
                                                 <div class="col col-md-9">
                                                     <select id="custom">
                                                         <?php
-                                                            foreach ($managers as $list){ 
+                                                            foreach ($customs as $list){ 
                                                                 echo '<option value="'.$list['id'].'" >'.$list['name'].'</option>';  
                                                             }
                                                         ?>
@@ -168,6 +184,7 @@
         var obj = {};
         obj['stype'] = $("#country").val();
         obj['sitem'] = $("#province").val();
+        obj['from_construction'] = $("#manager").val();
         obj['from_custom'] = $("#custom").val();
         obj['content'] = $("#content").val();
         $.ajax({

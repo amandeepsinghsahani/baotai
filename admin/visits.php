@@ -148,10 +148,11 @@
 						</div>
 						<div class="modal-body">
                             姓名:<span id="cname"></span><br>
-                            頭銜:<span id="ctitle"></span><br>
+                            分類:<span id="clevel"></span><br>
                             市話:<span id="ctel"></span><br>
                             手機:<span id="cmobile"></span><br>
-                            住址:<span id="caddress"></span>
+                            住址:<span id="caddress"></span><br>
+                            備註:<span id="cmemo"></span><br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
@@ -204,13 +205,14 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                console.log(response);
                 var xx = JSON.parse(response);
                 $("#cname").text(xx.name);
+                $("#clevel").text(xx.level);
                 $("#ctel").text(xx.tel);
                 $("#cmobile").text(xx.mobile);
                 $("#ctitle").text(xx.title);
                 $("#caddress").text(xx.address);
+                $("#cmemo").text(xx.memo);
             }
         });
     });

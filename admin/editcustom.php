@@ -100,10 +100,10 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="projeclevel" class=" form-control-label">會員分類</label>
+                                                    <label for="projectlevel" class=" form-control-label">會員分類</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                     <select id="projeclevel" class="form-control">
+                                                     <select id="projectlevel" class="form-control">
                                                         <option value="potential" <?php if($oneProject[0]['level']=="potential") echo 'selected'?> >潛在客戶</option>
                                                         <option value="order" <?php if($oneProject[0]['level']=="order") echo 'selected'?>>已訂客</option>
                                                         <option value="buy" <?php if($oneProject[0]['level']=="buy") echo 'selected'?>>已購客</option>
@@ -140,7 +140,7 @@
                                                     <label for="projectmemo" class=" form-control-label">備註</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="projectmemo"   value="<?=$oneProject[0]['memo']?>" class="form-control">
+                                                     <textarea id="projectmemo" rows="9"  class="form-control"><?=$oneProject[0]['memo']?></textarea>
                                                 </div>
                                             </div>
                                         </form>
@@ -206,8 +206,9 @@
         obj['level'] = $("#projectlevel").val();
         obj['memo'] = $("#projectmemo").val();
         obj['id'] =  $("#projectid").val();
+        console.log(obj);
         $.ajax({
-            url: '../edit_cutom.php',
+            url: '../edit_custom.php',
             cache: false,
             dataType: 'html',
             type: 'POST',

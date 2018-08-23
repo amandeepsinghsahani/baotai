@@ -13,18 +13,25 @@
     $ff = array(array("name"=>"漏水"),array("name"=>"地磚"),array("name"=>"壁磚"),array("name"=>"設備"),array("name"=>"油漆"));
 
     if(empty($search)){
-        $sql = "SELECT service.* ,customs.name as cname
-        FROM service , customs
-        WHERE service.stype = ? AND service.from_custom = customs.id
+        $sql = "SELECT service.* ,customs.name as cname, manager.name as mname, manager.account as maccount
+        FROM service , customs, manager
+        WHERE service.stype = ? 
+        AND service.from_custom = customs.id
+        AND service.from_construction = manager.id
         ORDER BY service.id DESC";
     }else{
-         $sql = "SELECT service.* ,customs.name as cname
-        FROM service , customs
-        WHERE service.stype = ? AND customs.name like '%".$search."%'  AND service.from_custom = customs.id
+         $sql = "SELECT service.* ,customs.name as cname, manager.name as mname, manager.account as maccount
+        FROM service , customs, manager
+        WHERE service.stype = ? AND customs.name like '%".$search."%'  
+        AND service.from_custom = customs.id
+        AND service.from_construction = manager.id
         ORDER BY service.id DESC";
     }
     
     $lists = $db->rawQuery($sql,array($sid));
+
+    $sqlm = "SELECT * FROM manager WHERE type = 'construction' ORDER BY id DESC";
+    $managers = $db->rawQuery($sqlm);
 
 ?>
 <!DOCTYPE html>
@@ -128,7 +135,9 @@
                                                 <th>No</th>
                                                 <th>項目</th>
                                                 <th>內容</th>
+                                                <th>開案工務專員</th>
                                                 <th>客服對象</th>
+                                                <th>目前狀態</th>
                                                 <th>回應紀錄</th>
                                                 <th>新增問題處理</th>
                                             </tr>
@@ -137,14 +146,24 @@
                                              <?php
                                                 $i = 1;
                                                 foreach ($lists as $list){ 
+                                                    $type = '未處理';
+                                                    $ssql = "SELECT * FROM service_status WHERE s_id = ? order by date desc limit 1";
+                                                    $ss = $db->rawQuery($ssql,array($list['id']));
+                                                    if(count($ss) > 0){
+                                                        $type = $ss[0]['type'];
+                                                    } 
                                                     echo '<tr>';
                                                     echo '<td>'.$i.'</td>';
                                                     echo '<td>'.$list['sitem'].'</td>';
                                                     echo '<td>'.$list['content'].'</td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 manager" data-toggle="modal" data-target="#mediumModal0" id="manager_'.$list['from_construction'].'">
+                                                                '.$list['mname'].'
+                                                            </button></td>';
                                                     echo '<td> <button type="button" class="btn btn-secondary mb-1 info" data-toggle="modal" data-target="#mediumModal" id="info_'.$list['from_custom'].'">
                                                                 '.$list['cname'].'
                                                             </button></td>';
-                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 res_info" data-toggle="modal" data-target="#mediumModal2" id="res_'.$list['id'].'_'.$list['sitem'].'_'.$list['content'].'">
+                                                    echo '<td>'.$type.'</td>';
+                                                    echo '<td> <button type="button" class="btn btn-secondary mb-1 res_info" data-toggle="modal" data-target="#mediumModal2" id="res_'.$list['id'].'_'.$list['sitem'].'_'.$list['content'].'_'.$list['mname'].'">
                                                                 點我查看
                                                             </button></td>';
                                                     echo '<td> <button type="button" class="btn btn-secondary mb-1 add_response" data-toggle="modal" data-target="#mediumModal1" id="addres_'.$list['id'].'">新增</button></td>';
@@ -161,6 +180,27 @@
                         </div>
                 </div>
             </div>
+            <!-- modal medium0 -->
+			<div class="modal fade" id="mediumModal0" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">工務專員資料</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            姓名:<span id="mname"></span><br>
+                            帳號:<span id="maccount"></span><br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- end modal medium0 -->
             <!-- modal medium -->
 			<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
@@ -173,10 +213,11 @@
 						</div>
 						<div class="modal-body">
                             姓名:<span id="cname"></span><br>
-                            頭銜:<span id="ctitle"></span><br>
+                            分類:<span id="clevel"></span><br>
                             市話:<span id="ctel"></span><br>
                             手機:<span id="cmobile"></span><br>
-                            住址:<span id="caddress"></span>
+                            住址:<span id="caddress"></span><br>
+                            備註:<span id="cmemo"></span><br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">確定</button>
@@ -196,6 +237,31 @@
 							</button>
 						</div>
 						<div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input1" class=" form-control-label">請選問題處理工務專員</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <select id="textarea-input1">
+                                        <?php
+                                            foreach ($managers as $list){ 
+                                                echo '<option value="'.$list['id'].'" >'.$list['name'].'</option>';  
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="textarea-input2" class=" form-control-label">請選擇客服狀態</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                   <select id="textarea-input2">
+                                       <option value="處理中" >處理中</option>
+                                       <option value="已結案" >已結案</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">問題處理</label>
@@ -226,6 +292,7 @@
 						<div class="modal-body">
                             類別:<span ><?=$sid?></span><br>
                             項目:<span id="res_item"></span><br>
+                            開案工務專員:<span id="res_construction"></span><br>
                             客服內容:<span id="res_q_content"></span><br>
                            <table class="table table-borderless table-data2">
                                 <thead>
@@ -233,6 +300,8 @@
                                         <th>No</th>
                                         <th>處理內容</th>
                                         <th>處理時間</th>
+                                        <th>處理工務專員帳號</th>
+                                        <th>處理工務專員姓名</th>
                                     </tr>
                                 </thead>
                                 <tbody id="res_table">
@@ -275,6 +344,28 @@
     <!-- Main JS-->
     <script src="js/main.js"></script>
     <script type="text/javascript">
+    $(document).on("click", ".manager", function() {
+        var obj = {};
+        obj['id'] = $(this).prop("id").split("_")[1];
+        $.ajax({
+            url: '../get_construction_info.php',
+            cache: false,
+            dataType: 'html',
+            type: 'POST',
+            data: obj,
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('HTTP status code: ' + jqXHR.status + '\n' +
+                'textStatus: ' + textStatus + '\n' +
+                'errorThrown: ' + errorThrown);
+                console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
+            },
+            success: function(response) {
+                var xx = JSON.parse(response);
+                $("#mname").text(xx.name);
+                $("#maccount").text(xx.account);
+            }
+        });
+    });
     $(document).on("click", ".info", function() {
         var obj = {};
         obj['id'] = $(this).prop("id").split("_")[1];
@@ -291,13 +382,14 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                //console.log(response);
                 var xx = JSON.parse(response);
                 $("#cname").text(xx.name);
+                $("#clevel").text(xx.level);
                 $("#ctel").text(xx.tel);
                 $("#cmobile").text(xx.mobile);
                 $("#ctitle").text(xx.title);
                 $("#caddress").text(xx.address);
+                $("#cmemo").text(xx.memo);
             }
         });
     });
@@ -308,8 +400,8 @@
         var obj = {};
         obj['sid'] = $("#res_s_id").val();
         obj['content'] = $("#textarea-input").val();
-        // console.log(obj);
-        // $("#textarea-input").val("");
+        obj['type'] = $("#textarea-input2").val();
+        obj['from_construction'] = $("#textarea-input1").val();
         $.ajax({
             url: '../add_response.php',
             cache: false,
@@ -323,11 +415,11 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                //console.log(response);
                 var xx = JSON.parse(response);
                 if(xx.message == "success"){
                     alert('新增成功');
                     $("#textarea-input").val("");
+                    location.reload();
                 }else if(xx.message == "failure"){
                     alert('新增失敗');
                 }
@@ -337,6 +429,7 @@
     $(document).on("click", ".res_info", function() {
         $("#res_item").text($(this).prop("id").split("_")[2]);
         $("#res_q_content").text($(this).prop("id").split("_")[3]);
+        $("#res_construction").text($(this).prop("id").split("_")[4]);
         var obj = {};
         obj['sid'] = $(this).prop("id").split("_")[1];
         $.ajax({
@@ -352,11 +445,10 @@
                 console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText);
             },
             success: function(response) {
-                console.log(response);
                 var tr = "";
                 var iii = 1;
                 response.forEach(function(element) {
-                    tr += '<tr><td >'+iii+'</td><td >'+element.content+'</td><td>'+element.date+'</td><tr>';
+                    tr += '<tr><td >'+iii+'</td><td >'+element.content+'</td><td>'+element.date+'</td><td>'+element.maccount+'</td><td>'+element.mname+'</td><tr>';
                     iii++;
                 });
                 $("#res_table").html(tr);

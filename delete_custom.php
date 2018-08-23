@@ -1,16 +1,9 @@
 <?php
     include "includes/init.php";
     $data_message = array();
-
-    $data = array (
-        "s_id" => $_REQUEST['sid'],
-        "content" => $_REQUEST['content'],
-        "type" => $_REQUEST['type'],
-        "from_construction" => $_REQUEST['from_construction']
-    );
     $db->startTransaction();
-    $m_id = $db->insert ('service_status', $data);
-    if ($m_id) {
+    $db->where ('id', $_POST["id"]);
+    if ($db->delete ("customs")){
         $db->commit();
         $data_message['message']  = "success";
     }else{

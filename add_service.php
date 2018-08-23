@@ -3,6 +3,7 @@
     $data_message = array();
     $data = array (
         "from_custom" => $_REQUEST['from_custom'],
+        "from_construction" => $_REQUEST['from_construction'],
         "content" => $_REQUEST['content'],
         "stype" => $_REQUEST['stype'],
         "sitem" => $_REQUEST['sitem'],

@@ -2,7 +2,6 @@
 	include "../includes/init.php";
     include "../includes/_inc.php";
     include "ck_user.php"; 
-    include "ck_admin.php"; 
     $sql = "SELECT * FROM project WHERE 1  ORDER BY id DESC";
     
     $lists = $db->rawQuery($sql);
